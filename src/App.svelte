@@ -3,8 +3,18 @@
 	import Footer from './components/Footer.svelte';
 	import SearchBar from './components/SearchBar.svelte';
 	import Button from './shared/Button.svelte';
+	import Card from './shared/Card.svelte';
 
-	export let name;
+	import { onMount } from 'svelte';
+
+	let newsTable = [];
+	onMount(async () => {
+		const res = await fetch(
+			'https://newsapi.org/v2/everything?q=Apple&from=2021-09-06&sortBy=popularity&apiKey=9c6e4339eda04a3e961469a00a816e2d'
+		);
+		let data = await res.json();
+		newsTable = data.articles;
+	});
 </script>
 
 <Header>
@@ -12,11 +22,12 @@
 	<Button>SEARCH</Button>
 </Header>
 <main>
-	<h1>Hello {name}!</h1>
-	<p>
-		Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-		how to build Svelte apps.
-	</p>
+	{#each newsTable as news}
+		<Card source={news.urlToImage}>
+			<h3><a href={news.url}>{news.title}</a></h3>
+			<p>{news.author}</p>
+		</Card>
+	{/each}
 </main>
 <Footer />
 
@@ -24,7 +35,7 @@
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
+		max-width: 360px;
 		margin: 0 auto;
 	}
 
