@@ -1,4 +1,4 @@
-<footer><div class="copyright">Copyrigth 2021 Newsner</div></footer>
+<footer><div class="copyright">&copy; 2021 Newsner. All rights reserved</div></footer>
 
 <style>
   footer{
