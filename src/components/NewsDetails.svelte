@@ -5,7 +5,7 @@
 
 <Card source={news.urlToImage}>
 	<h3><a href={news.url}>{news.title}</a></h3>
-	<p>{news.author}</p>
+	<p>{news.source.name}</p>
 </Card>
 
 <style>
